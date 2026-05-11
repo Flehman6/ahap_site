@@ -81,6 +81,12 @@ nav {
   text-decoration: none;
   border: none;
   cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nav-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(255,165,0,0.4);
 }
 
 /* ── HERO ── */
@@ -270,6 +276,12 @@ h2.display em {
   margin-top: 28px;
 }
 
+@media (max-width: 640px) {
+  .problem-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .problem-card {
   background: rgba(255,60,60,0.08);
   border: 1px solid rgba(255,60,60,0.15);
@@ -331,6 +343,12 @@ h2.display em {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
   margin-top: 28px;
+}
+
+@media (max-width: 640px) {
+  .metiers-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .metier-card {
@@ -424,6 +442,12 @@ h2.display em {
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin-top: 28px;
+}
+
+@media (max-width: 640px) {
+  .artisan-perks {
+    grid-template-columns: 1fr;
+  }
 }
 
 .perk {
@@ -794,14 +818,14 @@ footer a { color: var(--orange); text-decoration: none; }
 <!-- HERO -->
 <section class="hero">
   <div class="hero-text fade-in">
-    <div class="section-tag">🇧🇯 Application gratuite · Bénin</div>
+    <div class="section-tag">🇧🇯 Application gratuite · Bénin · 200+ utilisateurs actifs</div>
     <h1 class="display">Trouve un artisan de <em>confiance</em> près de toi</h1>
-    <p>Maçon, menuisier, électricien, couturier… trouve rapidement le bon professionnel au Bénin.</p>
+    <p>Maçon, menuisier, électricien, couturier… rejoins les premiers à utiliser ahap! et trouve le bon professionnel en quelques minutes.</p>
     <div class="hero-btns">
       <button class="btn-primary" onclick="scrollToSection('client-section')">👤 Je suis client</button>
       <button class="btn-secondary" onclick="scrollToSection('artisan-target')">🔨 Je suis artisan</button>
     </div>
-    <p class="hero-free">✅ Application gratuite sur Play Store</p>
+    <p class="hero-free">✅ Gratuit · Play Store · Sécurisé</p>
   </div>
 
   <div class="hero-video-wrap fade-in" id="heroVideoWrap">
@@ -886,7 +910,7 @@ footer a { color: var(--orange); text-decoration: none; }
   </div>
   <br>
   <a href="https://play.google.com/store/apps/details?id=com.ahap.app" target="_blank" class="btn-primary" style="width:100%;justify-content:center;text-decoration:none;">
-    📲 Télécharger gratuitement
+    📲 Télécharger maintenant (gratuit)
   </a>
 </section>
 
@@ -971,7 +995,7 @@ footer a { color: var(--orange); text-decoration: none; }
 <section class="artisan-section" id="artisan-target">
   <div class="section-tag">🔨 Pour les artisans</div>
   <h2 class="display fade-in">Tu es artisan ? <em>Gagne plus</em> de clients</h2>
-  <p style="color:var(--gray);font-size:14px;margin-top:8px;margin-bottom:4px;">Rejoins des milliers d'artisans qui font confiance à ahap! pour développer leur activité.</p>
+  <p style="color:var(--gray);font-size:14px;margin-top:8px;margin-bottom:4px;">200+ artisans et clients font déjà confiance à ahap!. Sois des premiers à développer ton activité avec nous.</p>
   <div class="artisan-perks fade-in">
     <div class="perk">
       <div class="icon">📢</div>
@@ -1000,60 +1024,75 @@ footer a { color: var(--orange); text-decoration: none; }
   </a>
 </section>
 
-<!-- SOCIAL PROOF -->
+<!-- SOCIAL PROOF & STATS -->
 <section class="proof-section">
-  <div class="section-tag">💬 Ils nous font confiance</div>
-  <h2 class="display fade-in">Ce que disent nos <em>utilisateurs</em></h2>
+  <div class="section-tag">📈 Déjà 200+ utilisateurs</div>
+  <h2 class="display fade-in">Une communauté en <em>croissance</em></h2>
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 28px; margin-bottom: 32px;">
+    <div style="background: rgba(255,165,0,0.1); border: 1px solid rgba(255,165,0,0.2); border-radius: 18px; padding: 20px; text-align: center;">
+      <div style="font-size: 32px; font-weight: 800; color: var(--orange); font-family: 'Syne', sans-serif;">200+</div>
+      <p style="font-size: 13px; color: var(--gray); margin-top: 8px;">Utilisateurs actifs</p>
+    </div>
+    <div style="background: rgba(255,165,0,0.1); border: 1px solid rgba(255,165,0,0.2); border-radius: 18px; padding: 20px; text-align: center;">
+      <div style="font-size: 32px; font-weight: 800; color: var(--orange); font-family: 'Syne', sans-serif;">6+</div>
+      <p style="font-size: 13px; color: var(--gray); margin-top: 8px;">Métiers représentés</p>
+    </div>
+    <div style="background: rgba(255,165,0,0.1); border: 1px solid rgba(255,165,0,0.2); border-radius: 18px; padding: 20px; text-align: center;">
+      <div style="font-size: 32px; font-weight: 800; color: var(--orange); font-family: 'Syne', sans-serif;">100%</div>
+      <p style="font-size: 13px; color: var(--gray); margin-top: 8px;">Gratuit · Sécurisé</p>
+    </div>
+  </div>
+  <h2 class="display fade-in" style="font-size: 24px; margin-bottom: 20px;">Ce que disent les <em>premiers utilisateurs</em></h2>
   <div class="reviews fade-in">
     <div class="review-card">
       <div class="review-header">
-        <div class="avatar a1">K</div>
+        <div class="avatar a1">A</div>
         <div class="review-meta">
-          <h4>Kossi A.</h4>
-          <span>Client · Cotonou</span>
+          <h4>Utilisateur Client</h4>
+          <span>Cotonou</span>
         </div>
       </div>
       <div class="stars">★★★★★</div>
-      <p>J'ai trouvé un électricien en moins de 10 minutes. Il est venu le lendemain et le travail était nickel. Je recommande vraiment !</p>
+      <p>L'app est simple et intuitive. J'ai trouvé un artisan rapidement et le contact via WhatsApp était direct. Vraiment pratique pour nous au Bénin !</p>
     </div>
     <div class="review-card">
       <div class="review-header">
-        <div class="avatar a2">F</div>
+        <div class="avatar a2">M</div>
         <div class="review-meta">
-          <h4>Fatou M.</h4>
-          <span>Artisan couturière · Porto-Novo</span>
+          <h4>Artisan</h4>
+          <span>Porto-Novo</span>
         </div>
       </div>
       <div class="stars">★★★★★</div>
-      <p>Depuis que je suis sur ahap!, j'ai au moins 5 nouvelles commandes par semaine. L'appli est simple et mes clients adorent les avis vérifiés.</p>
+      <p>Depuis que j'ai téléchargé ahap!, je reçois des demandes de clients. C'est facile à utiliser et ça m'aide vraiment à développer mon activité.</p>
     </div>
     <div class="review-card">
       <div class="review-header">
-        <div class="avatar a3">J</div>
+        <div class="avatar a3">S</div>
         <div class="review-meta">
-          <h4>Jean-Paul D.</h4>
-          <span>Client · Parakou</span>
+          <h4>Utilisateur Client</h4>
+          <span>Parakou</span>
         </div>
       </div>
-      <div class="stars">★★★★☆</div>
-      <p>Avant j'avais du mal à trouver un maçon fiable. Avec ahap! je vois les avis, je contacte sur WhatsApp et c'est réglé. Très pratique !</p>
+      <div class="stars">★★★★★</div>
+      <p>Enfin une app qui comprend notre besoin ! Trouver un artisan sérieux n'a jamais été aussi facile. Je recommande à tous mes amis.</p>
     </div>
   </div>
 </section>
 
 <!-- FINAL CTA -->
 <section class="cta-section" id="cta">
-  <div class="section-tag">🚀 C'est gratuit</div>
-  <h2 class="display fade-in">Télécharge <em>ahap!</em><br>gratuitement</h2>
-  <p>Rejoins la communauté des artisans et clients qui font confiance à ahap! au Bénin et en Afrique.</p>
+  <div class="section-tag">🚀 Rejoins les premiers</div>
+  <h2 class="display fade-in">Sois parmi les <em>premiers</em></h2>
+  <p>200+ utilisateurs font déjà confiance à ahap! Télécharge maintenant et sois au cœur d'une communauté en croissance au Bénin.</p>
   <a href="https://play.google.com/store/apps/details?id=com.ahap.app" target="_blank" class="playstore-btn">
     <div class="ps-icon">▶</div>
     <div class="ps-text">
-      <span class="ps-label">Disponible sur</span>
+      <span class="ps-label">Gratuit sur</span>
       <span class="ps-store">Google Play Store</span>
     </div>
   </a>
-  <p class="cta-free">🆓 Téléchargement 100% gratuit · Bénin & Afrique</p>
+  <p class="cta-free">🆓 100% gratuit · Sécurisé · Bénin & Afrique</p>
 </section>
 
 <!-- FOOTER -->
