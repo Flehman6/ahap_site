@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ahap! est l'application gratuite qui aide les clients au Bénin à trouver des artisans fiables près d'eux, et les artisans à gagner plus de clients." />
+  <title>ahap! – Trouve un artisan de confiance près de toi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --green-950: #04130c;
+      --green-900: #071d13;
+      --green-850: #092719;
+      --green-800: #0b2e1e;
+      --green-700: #0e3d28;
+      --green-600: #145232;
+      --orange-500: #ffa500;
+      --orange-600: #ff7a00;
+      --orange-700: #ff5c00;
+      --cream: #fff7ea;
+      --muted: #b6c5b8;
+      --muted-2: #819383;
+      --danger: #ff7171;
+      --card: rgba(255, 255, 255, 0.055);
+      --card-strong: rgba(255, 255, 255, 0.085);
+      --line: rgba(255, 255, 255, 0.09);
+      --orange-line: rgba(255, 165, 0, 0.22);
+      --radius-sm: 14px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+      --shadow-orange: 0 14px 35px rgba(255, 122, 0, 0.24);
+      --container: 1120px;
+      --nav-height: 72px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 80% 0%, rgba(255, 165, 0, 0.13), transparent 28%),
+        radial-gradient(circle at 10% 12%, rgba(34, 197, 94, 0.10), transparent 24%),
+        var(--green-900);
+      color: var(--cream);
+      overflow-x: hidden;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(100% - 40px, var(--container));
+      margin: 0 auto;
+    }
+
+    .display {
+      font-family: "Poppins", "Inter", sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.045em;
+      line-height: 1.03;
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, var(--orange-500), var(--orange-700));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section {
+      padding: 92px 0;
+      position: relative;
+    }
+
+    .section-header {
+      max-width: 760px;
+      margin-bottom: 36px;
+    }
+
+    .section-center {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--orange-500);
+      background: rgba(255, 165, 0, 0.12);
+      border: 1px solid rgba(255, 165, 0, 0.22);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 7vw, 5.9rem);
+      max-width: 920px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4.8vw, 3.7rem);
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      line-height: 1.75;
+      margin-top: 18px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 15px 22px;
+      font-weight: 800;
+      font-size: 15px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      min-height: 52px;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--orange-500), var(--orange-700));
+      color: #071d13;
+      box-shadow: var(--shadow-orange);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--cream);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 18px 44px rgba(255, 122, 0, 0.34);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 165, 0, 0.30);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      background: rgba(4, 19, 12, 0.74);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-inner {
+      width: min(100% - 40px, var(--container));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Poppins", sans-serif;
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      color: var(--orange-500);
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--orange-500), var(--orange-700));
+      color: var(--green-950);
+      box-shadow: 0 8px 24px rgba(255, 122, 0, 0.22);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      color: var(--orange-500);
+    }
+
+    .nav-cta {
+      padding: 11px 18px;
+      min-height: 44px;
+      font-size: 14px;
+    }
+
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding: calc(var(--nav-height) + 54px) 0 70px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(360px, 0.96fr);
+      gap: 56px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--cream);
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 165, 0, 0.22);
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      font-size: clamp(1.03rem, 1.8vw, 1.22rem);
+      line-height: 1.8;
+      max-width: 660px;
+      margin: 22px 0 28px;
+    }
+
+    .hero-proof {
+      margin-top: 18px;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .hero-proof span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .hero-card {
+      position: relative;
+    }
+
+    .phone-shell {
+      width: min(100%, 430px);
+      margin-left: auto;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.03)),
+        var(--green-950);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 36px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phone-shell::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 999px;
+      background: rgba(255, 165, 0, 0.16);
+      filter: blur(30px);
+      top: -80px;
+      right: -80px;
+      pointer-events: none;
+    }
+
+    .video-card {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border-radius: 26px;
+      background: #000;
+      border: 1px solid rgba(255, 165, 0, 0.18);
+    }
+
+    .yt-facade {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      isolation: isolate;
+    }
+
+    .yt-facade img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.78;
+      transform: scale(1.02);
+    }
+
+    .yt-overlay {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.48));
+      z-index: 1;
+    }
+
+    .yt-play {
+      width: 76px;
+      height: 76px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--orange-500), var(--orange-700));
+      color: var(--green-950);
+      box-shadow: 0 0 0 10px rgba(255, 165, 0, 0.12), 0 18px 46px rgba(0, 0, 0, 0.42);
+      font-size: 30px;
+      padding-left: 4px;
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    .mock-panel {
+      margin-top: 14px;
+      background: rgba(255, 255, 255, 0.055);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 24px;
+      padding: 16px;
+    }
+
+    .search-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 999px;
+      padding: 13px 14px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .artisan-list {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .artisan-mini {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px;
+      background: rgba(255, 255, 255, 0.055);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+    }
+
+    .artisan-left {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-width: 0;
+    }
+
+    .mini-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 165, 0, 0.13);
+      flex: 0 0 auto;
+    }
+
+    .artisan-mini h3 {
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .artisan-mini p {
+      font-size: 12px;
+      color: var(--muted-2);
+      margin-top: 2px;
+    }
+
+    .rating {
+      color: var(--orange-500);
+      font-size: 12px;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    .floating-stat {
+      position: absolute;
+      left: -22px;
+      bottom: 52px;
+      background: rgba(255, 247, 234, 0.96);
+      color: var(--green-950);
+      border-radius: 22px;
+      padding: 14px 16px;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+      max-width: 190px;
+    }
+
+    .floating-stat strong {
+      display: block;
+      font-size: 24px;
+      font-family: "Poppins", sans-serif;
+      letter-spacing: -0.04em;
+    }
+
+    .floating-stat span {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #385045;
+      line-height: 1.35;
+    }
+
+    .trust-strip {
+      padding: 18px 0;
+      background: rgba(255, 255, 255, 0.035);
+      border-block: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .trust-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .trust-item {
+      text-align: center;
+      padding: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .trust-item strong {
+      color: var(--orange-500);
+      display: block;
+      font-family: "Poppins", sans-serif;
+      font-size: 22px;
+      letter-spacing: -0.04em;
+      margin-bottom: 2px;
+    }
+
+    .problem-section {
+      background: linear-gradient(180deg, var(--green-900), var(--green-950));
+    }
+
+    .grid-4,
+    .grid-3,
+    .grid-2 {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      background: var(--card-strong);
+      border-color: rgba(255, 165, 0, 0.22);
+    }
+
+    .problem-card {
+      background: rgba(255, 113, 113, 0.065);
+      border-color: rgba(255, 113, 113, 0.16);
+    }
+
+    .icon-lg {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: rgba(255, 165, 0, 0.12);
+      font-size: 25px;
+      margin-bottom: 18px;
+    }
+
+    .problem-card .icon-lg {
+      background: rgba(255, 113, 113, 0.12);
+    }
+
+    .card h3 {
+      font-size: 18px;
+      line-height: 1.25;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .solution-section {
+      background:
+        radial-gradient(circle at 18% 12%, rgba(255, 165, 0, 0.08), transparent 24%),
+        var(--green-950);
+    }
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .feature-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      padding: 18px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.055);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    .feature-item .icon-lg {
+      width: 48px;
+      height: 48px;
+      margin: 0;
+      border-radius: 16px;
+      flex: 0 0 auto;
+    }
+
+    .feature-item h3 {
+      font-size: 17px;
+      margin-bottom: 4px;
+    }
+
+    .feature-item p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .highlight-box {
+      background:
+        linear-gradient(135deg, rgba(255, 165, 0, 0.18), rgba(255, 92, 0, 0.06)),
+        rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 165, 0, 0.24);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .highlight-box h3 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      margin-bottom: 12px;
+    }
+
+    .highlight-box p {
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 22px;
+    }
+
+    .jobs-section {
+      background: linear-gradient(180deg, var(--green-950), var(--green-850));
+    }
+
+    .job-card {
+      text-align: center;
+      padding: 24px 16px;
+    }
+
+    .job-card .icon-lg {
+      margin: 0 auto 15px;
+    }
+
+    .steps-section {
+      background: linear-gradient(180deg, var(--green-850), var(--green-950));
+    }
+
+    .steps {
+      counter-reset: step;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .step-card {
+      position: relative;
+      min-height: 230px;
+      overflow: hidden;
+    }
+
+    .step-number {
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--orange-500), var(--orange-700));
+      color: var(--green-950);
+      font-family: "Poppins", sans-serif;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .step-card::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 999px;
+      right: -62px;
+      bottom: -62px;
+      background: rgba(255, 165, 0, 0.08);
+    }
+
+    .artisan-section {
+      background:
+        radial-gradient(circle at 85% 20%, rgba(255, 165, 0, 0.13), transparent 22%),
+        linear-gradient(135deg, var(--green-800), var(--green-950));
+      border-block: 1px solid rgba(255, 165, 0, 0.13);
+    }
+
+    .artisan-cta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .perks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .proof-section {
+      background: var(--green-950);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 42px;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 28px 18px;
+      background: rgba(255, 165, 0, 0.08);
+      border: 1px solid rgba(255, 165, 0, 0.18);
+      border-radius: var(--radius-md);
+    }
+
+    .stat-card strong {
+      display: block;
+      color: var(--orange-500);
+      font-family: "Poppins", sans-serif;
+      font-size: clamp(2rem, 5vw, 3.3rem);
+      letter-spacing: -0.055em;
+      line-height: 1;
+    }
+
+    .stat-card span {
+      display: block;
+      color: var(--muted);
+      font-weight: 700;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .review-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .review-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      font-family: "Poppins", sans-serif;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--orange-500), var(--orange-700));
+      color: var(--green-950);
+      flex: 0 0 auto;
+    }
+
+    .review-meta h3 {
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+
+    .review-meta span {
+      color: var(--muted-2);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .stars {
+      color: #ffd56b;
+      letter-spacing: 0.04em;
+      font-size: 15px;
+    }
+
+    .review-card p {
+      font-size: 15px;
+    }
+
+    .final-cta {
+      padding: 100px 0 112px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 165, 0, 0.16), transparent 34%),
+        linear-gradient(180deg, var(--green-950), var(--green-900));
+    }
+
+    .final-cta .lead {
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 28px;
+    }
+
+    .playstore-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(135deg, var(--orange-500), var(--orange-700));
+      color: var(--green-950);
+      border-radius: 20px;
+      padding: 17px 24px;
+      min-width: 300px;
+      justify-content: center;
+      box-shadow: var(--shadow-orange);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-weight: 900;
+    }
+
+    .playstore-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 48px rgba(255, 122, 0, 0.34);
+    }
+
+    .play-icon {
+      font-size: 28px;
+    }
+
+    .play-text {
+      text-align: left;
+      line-height: 1.05;
+    }
+
+    .play-text small {
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 10px;
+      font-weight: 800;
+      opacity: 0.72;
+      margin-bottom: 4px;
+    }
+
+    .play-text strong {
+      display: block;
+      font-family: "Poppins", sans-serif;
+      font-size: 18px;
+    }
+
+    footer {
+      background: #020904;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 30px 0 104px;
+      color: var(--muted-2);
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    footer strong {
+      color: var(--orange-500);
+      font-family: "Poppins", sans-serif;
+      font-size: 18px;
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 22px;
+      bottom: 92px;
+      z-index: 900;
+      width: 58px;
+      height: 58px;
+      border-radius: 999px;
+      background: #25d366;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 14px 34px rgba(37, 211, 102, 0.35);
+      font-size: 27px;
+      transition: transform 0.2s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    .sticky-bar {
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      z-index: 850;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 12px 12px 16px;
+      background: rgba(4, 19, 12, 0.92);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 165, 0, 0.22);
+      border-radius: 22px;
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.38);
+      transform: translateY(130%);
+      transition: transform 0.28s ease;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .sticky-bar.visible {
+      transform: translateY(0);
+    }
+
+    .sticky-text {
+      min-width: 0;
+    }
+
+    .sticky-text strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .sticky-text span {
+      display: block;
+      color: var(--muted-2);
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .sticky-bar .btn {
+      min-height: 44px;
+      padding: 11px 16px;
+      font-size: 13px;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 980px) {
+      :root {
+        --nav-height: 66px;
+      }
+
+      .container,
+      .nav-inner {
+        width: min(100% - 32px, var(--container));
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: calc(var(--nav-height) + 38px) 0 56px;
+      }
+
+      .hero-grid,
+      .feature-row,
+      .artisan-cta {
+        grid-template-columns: 1fr;
+        gap: 34px;
+      }
+
+      .phone-shell {
+        margin: 0 auto;
+      }
+
+      .floating-stat {
+        left: 12px;
+        bottom: 28px;
+      }
+
+      .grid-4,
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        background:
+          radial-gradient(circle at 80% 0%, rgba(255, 165, 0, 0.14), transparent 22%),
+          var(--green-900);
+      }
+
+      .section {
+        padding: 68px 0;
+      }
+
+      .brand {
+        font-size: 24px;
+      }
+
+      .brand-mark {
+        width: 35px;
+        height: 35px;
+        border-radius: 12px;
+      }
+
+      .nav-cta {
+        padding: 10px 14px;
+        font-size: 13px;
+      }
+
+      .hero-badge {
+        font-size: 12px;
+        line-height: 1.35;
+        align-items: flex-start;
+      }
+
+      h1 {
+        font-size: clamp(2.35rem, 13vw, 4.05rem);
+      }
+
+      h2 {
+        font-size: clamp(2rem, 9vw, 3rem);
+      }
+
+      .hero-copy,
+      .lead {
+        font-size: 1rem;
+        line-height: 1.68;
+      }
+
+      .btn-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-proof {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .phone-shell {
+        border-radius: 28px;
+        padding: 12px;
+      }
+
+      .video-card {
+        border-radius: 22px;
+      }
+
+      .yt-play {
+        width: 64px;
+        height: 64px;
+        font-size: 25px;
+      }
+
+      .floating-stat {
+        position: static;
+        max-width: none;
+        margin-top: 12px;
+      }
+
+      .trust-inner,
+      .grid-3,
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-4,
+      .grid-2,
+      .steps,
+      .perks {
+        grid-template-columns: 1fr;
+      }
+
+      .job-card {
+        display: flex;
+        text-align: left;
+        gap: 14px;
+        align-items: center;
+        padding: 18px;
+      }
+
+      .job-card .icon-lg {
+        margin: 0;
+        flex: 0 0 auto;
+      }
+
+      .step-card {
+        min-height: auto;
+      }
+
+      .feature-item {
+        padding: 16px;
+      }
+
+      .highlight-box {
+        padding: 24px;
+      }
+
+      .playstore-btn {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .whatsapp-float {
+        right: 18px;
+        bottom: 96px;
+        width: 52px;
+        height: 52px;
+        font-size: 24px;
+      }
+
+      .sticky-bar {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        border-radius: 18px;
+      }
+
+      .sticky-text strong {
+        font-size: 13px;
+      }
+
+      .sticky-text span {
+        font-size: 11px;
+      }
+
+      .sticky-bar .btn {
+        width: auto;
+        padding: 10px 14px;
+        min-width: 118px;
+      }
+
+      footer {
+        padding-bottom: 104px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .container,
+      .nav-inner {
+        width: min(100% - 24px, var(--container));
+      }
+
+      .brand-text {
+        display: none;
+      }
+
+      .nav-cta {
+        font-size: 12px;
+        padding: 9px 12px;
+      }
+
+      .sticky-bar {
+        padding: 10px;
+      }
+
+      .sticky-bar .btn {
+        min-width: 105px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a href="#top" class="brand" aria-label="Accueil ahap!">
+        <span class="brand-mark">a!</span>
+        <span class="brand-text">ahap!</span>
+      </a>
+
+      <div class="nav-links" aria-label="Navigation principale">
+        <a href="#client-section">Clients</a>
+        <a href="#metiers">Métiers</a>
+        <a href="#comment-ca-marche">Comment ça marche</a>
+        <a href="#artisan-target">Artisans</a>
+      </div>
+
+      <a href="https://play.google.com/store/apps/details?id=com.ahap.app" target="_blank" rel="noopener" class="btn btn-primary nav-cta">Télécharger</a>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero" aria-label="Présentation de ahap!">
+      <div class="container hero-grid">
+        <div class="hero-content fade-in">
+          <div class="hero-badge">🇧🇯 Bénin · Application gratuite · 200+ premiers utilisateurs</div>
+          <h1 class="display">Trouve un artisan fiable <span class="text-gradient">près de toi</span>.</h1>
+          <p class="hero-copy">Maçon, électricien, menuisier, couturier, mécanicien… avec ahap!, tu trouves rapidement un professionnel sérieux, noté par la communauté, et joignable en quelques clics.</p>
+
+          <div class="btn-row">
+            <button class="btn btn-primary" type="button" onclick="scrollToSection('client-section')">👤 Je cherche un artisan</button>
+            <button class="btn btn-secondary" type="button" onclick="scrollToSection('artisan-target')">🔨 Je suis artisan</button>
+          </div>
+
+          <div class="hero-proof" aria-label="Avantages clés">
+            <span>✅ Gratuit sur Play Store</span>
+            <span>⭐ Avis vérifiés</span>
+            <span>💬 Contact direct</span>
+          </div>
+        </div>
+
+        <div class="hero-card fade-in">
+          <div class="phone-shell">
+            <div class="video-card" id="heroVideoWrap">
+              <div class="yt-facade" id="ytFacade" onclick="loadYouTube()" role="button" tabindex="0" aria-label="Voir la vidéo ahap!">
+                <img src="https://i.ytimg.com/vi/ISpoLRntwrI/hqdefault.jpg" alt="Vidéo de présentation ahap!" loading="eager" />
+                <div class="yt-overlay">
+                  <div class="yt-play">▶</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mock-panel" aria-label="Aperçu de recherche artisan">
+              <div class="search-pill">🔎 Chercher un artisan à Cotonou</div>
+              <div class="artisan-list">
+                <div class="artisan-mini">
+                  <div class="artisan-left">
+                    <div class="mini-icon">⚡</div>
+                    <div>
+                      <h3>Électricien disponible</h3>
+                      <p>Contact direct · Avis vérifiés</p>
+                    </div>
+                  </div>
+                  <span class="rating">★ 4.9</span>
+                </div>
+                <div class="artisan-mini">
+                  <div class="artisan-left">
+                    <div class="mini-icon">🪚</div>
+                    <div>
+                      <h3>Menuisier proche</h3>
+                      <p>Réponse rapide · Profil complet</p>
+                    </div>
+                  </div>
+                  <span class="rating">★ 4.8</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="floating-stat">
+            <strong>200+</strong>
+            <span>premiers utilisateurs déjà dans l'écosystème ahap!</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-strip" aria-label="Indicateurs de confiance">
+      <div class="container trust-inner">
+        <div class="trust-item"><strong>100%</strong> Gratuit</div>
+        <div class="trust-item"><strong>6+</strong> Métiers clés</div>
+        <div class="trust-item"><strong>24/7</strong> Accessible</div>
+        <div class="trust-item"><strong>1 clic</strong> Contact WhatsApp</div>
+      </div>
+    </section>
+
+    <section class="section problem-section" id="client-section">
+      <div class="container">
+        <div class="section-header section-center fade-in">
+          <div class="section-kicker">😤 Le problème</div>
+          <h2 class="display">Trouver un bon artisan ne devrait pas être compliqué.</h2>
+          <p class="lead">Aujourd'hui, beaucoup de clients perdent du temps, prennent des risques, ou choisissent au hasard. ahap! remet la confiance au centre.</p>
+        </div>
+
+        <div class="grid-4 fade-in">
+          <article class="card problem-card">
+            <div class="icon-lg">😤</div>
+            <h3>Travail bâclé</h3>
+            <p>Difficile de savoir à l'avance si l'artisan est sérieux, ponctuel et compétent.</p>
+          </article>
+          <article class="card problem-card">
+            <div class="icon-lg">⏰</div>
+            <h3>Temps perdu</h3>
+            <p>Tu demandes partout, tu attends des réponses, et tu n'es jamais sûr du résultat.</p>
+          </article>
+          <article class="card problem-card">
+            <div class="icon-lg">🤷</div>
+            <h3>Manque de confiance</h3>
+            <p>Sans avis, sans profil clair, le choix devient une question de chance.</p>
+          </article>
+          <article class="card problem-card">
+            <div class="icon-lg">📵</div>
+            <h3>Contact difficile</h3>
+            <p>Même quand tu trouves quelqu'un, il faut encore réussir à le joindre rapidement.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section solution-section">
+      <div class="container feature-row">
+        <div class="highlight-box fade-in">
+          <div class="section-kicker">✅ La solution</div>
+          <h3 class="display">ahap! transforme la recherche d'artisans en expérience simple.</h3>
+          <p>Tu cherches par métier, tu consultes les profils, tu regardes les avis, puis tu contactes directement l'artisan. Simple, rapide, utile.</p>
+          <a href="https://play.google.com/store/apps/details?id=com.ahap.app" target="_blank" rel="noopener" class="btn btn-primary">📲 Télécharger gratuitement</a>
+        </div>
+
+        <div class="feature-stack fade-in">
+          <article class="feature-item">
+            <div class="icon-lg">⭐</div>
+            <div>
+              <h3>Avis vérifiés</h3>
+              <p>Les retours clients aident la communauté à identifier les artisans les plus fiables.</p>
+            </div>
+          </article>
+          <article class="feature-item">
+            <div class="icon-lg">💬</div>
+            <div>
+              <h3>Contact direct via WhatsApp</h3>
+              <p>Tu peux discuter rapidement, poser tes questions et convenir des détails.</p>
+            </div>
+          </article>
+          <article class="feature-item">
+            <div class="icon-lg">📍</div>
+            <div>
+              <h3>Recherche locale</h3>
+              <p>Trouve les professionnels selon le métier, la ville et la proximité.</p>
+            </div>
+          </article>
+          <article class="feature-item">
+            <div class="icon-lg">🔒</div>
+            <div>
+              <h3>Plus de confiance</h3>
+              <p>Des profils clairs, un suivi plus propre, et une expérience pensée pour le terrain.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section jobs-section" id="metiers">
+      <div class="container">
+        <div class="section-header section-center fade-in">
+          <div class="section-kicker">🧰 Les métiers</div>
+          <h2 class="display">Des artisans utiles au quotidien.</h2>
+          <p class="lead">ahap! est conçu pour connecter les clients aux professionnels dont ils ont vraiment besoin.</p>
+        </div>
+
+        <div class="grid-3 fade-in">
+          <article class="card job-card">
+            <div class="icon-lg">🔧</div>
+            <div>
+              <h3>Mécanicien</h3>
+              <p>Auto, moto, diagnostic, dépannage.</p>
+            </div>
+          </article>
+          <article class="card job-card">
+            <div class="icon-lg">⚡</div>
+            <div>
+              <h3>Électricien</h3>
+              <p>Installation, réparation, bâtiment.</p>
+            </div>
+          </article>
+          <article class="card job-card">
+            <div class="icon-lg">🪚</div>
+            <div>
+              <h3>Menuisier</h3>
+              <p>Meubles, portes, aménagement.</p>
+            </div>
+          </article>
+          <article class="card job-card">
+            <div class="icon-lg">🧵</div>
+            <div>
+              <h3>Couturier</h3>
+              <p>Retouches, habits, broderie.</p>
+            </div>
+          </article>
+          <article class="card job-card">
+            <div class="icon-lg">🏗️</div>
+            <div>
+              <h3>Maçon</h3>
+              <p>Construction, rénovation, finitions.</p>
+            </div>
+          </article>
+          <article class="card job-card">
+            <div class="icon-lg">🎨</div>
+            <div>
+              <h3>Peintre</h3>
+              <p>Bâtiment, décoration, entretien.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section steps-section" id="comment-ca-marche">
+      <div class="container">
+        <div class="section-header section-center fade-in">
+          <div class="section-kicker">🔄 Comment ça marche</div>
+          <h2 class="display">Une expérience simple du début à la fin.</h2>
+          <p class="lead">L'objectif est clair : réduire la friction entre le besoin du client et le savoir-faire de l'artisan.</p>
+        </div>
+
+        <div class="steps fade-in">
+          <article class="card step-card">
+            <div class="step-number">1</div>
+            <h3>Tu choisis le métier</h3>
+            <p>Tu sélectionnes le type de service dont tu as besoin et ta localisation.</p>
+          </article>
+          <article class="card step-card">
+            <div class="step-number">2</div>
+            <h3>Tu compares les profils</h3>
+            <p>Tu regardes les informations disponibles, les avis et la proximité.</p>
+          </article>
+          <article class="card step-card">
+            <div class="step-number">3</div>
+            <h3>Tu contactes l'artisan</h3>
+            <p>Tu passes rapidement à la discussion via WhatsApp ou via l'application.</p>
+          </article>
+          <article class="card step-card">
+            <div class="step-number">4</div>
+            <h3>Tu notes l'expérience</h3>
+            <p>Ton avis aide les prochains clients à choisir avec plus de confiance.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section artisan-section" id="artisan-target">
+      <div class="container artisan-cta">
+        <div class="fade-in">
+          <div class="section-kicker">🔨 Pour les artisans</div>
+          <h2 class="display">Tu es artisan ? Gagne en visibilité et trouve plus de clients.</h2>
+          <p class="lead">ahap! aide les artisans sérieux à sortir de l'invisibilité, à présenter leur savoir-faire, et à recevoir des demandes plus facilement.</p>
+          <div class="btn-row" style="margin-top: 26px;">
+            <a href="https://play.google.com/store/apps/details?id=com.ahap.app" target="_blank" rel="noopener" class="btn btn-primary">🔨 Je m'inscris comme artisan</a>
+          </div>
+        </div>
+
+        <div class="perks fade-in">
+          <article class="card">
+            <div class="icon-lg">📢</div>
+            <h3>Plus de visibilité</h3>
+            <p>Ton profil peut être trouvé par des clients proches de toi.</p>
+          </article>
+          <article class="card">
+            <div class="icon-lg">💰</div>
+            <h3>Plus d'opportunités</h3>
+            <p>Plus de demandes qualifiées, plus de chances de développer ton activité.</p>
+          </article>
+          <article class="card">
+            <div class="icon-lg">✅</div>
+            <h3>Clients plus sérieux</h3>
+            <p>Les demandes sont plus claires et le contact est plus direct.</p>
+          </article>
+          <article class="card">
+            <div class="icon-lg">⭐</div>
+            <h3>Réputation visible</h3>
+            <p>Les bons avis deviennent un vrai avantage pour gagner la confiance.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section proof-section">
+      <div class="container">
+        <div class="section-header section-center fade-in">
+          <div class="section-kicker">📈 Communauté</div>
+          <h2 class="display">Les premiers utilisateurs ouvrent la voie.</h2>
+          <p class="lead">ahap! commence avec une communauté engagée au Bénin, puis a vocation à grandir dans toute l'Afrique francophone.</p>
+        </div>
+
+        <div class="stats-grid fade-in">
+          <div class="stat-card">
+            <strong>200+</strong>
+            <span>utilisateurs actifs</span>
+          </div>
+          <div class="stat-card">
+            <strong>6+</strong>
+            <span>métiers représentés</span>
+          </div>
+          <div class="stat-card">
+            <strong>100%</strong>
+            <span>gratuit et accessible</span>
+          </div>
+        </div>
+
+        <div class="grid-3 fade-in">
+          <article class="card review-card">
+            <div class="review-top">
+              <div class="avatar">A</div>
+              <div class="review-meta">
+                <h3>Client à Cotonou</h3>
+                <span>Besoin urgent</span>
+              </div>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>J'ai aimé la simplicité. On comprend vite quoi faire et le contact avec l'artisan est direct.</p>
+          </article>
+          <article class="card review-card">
+            <div class="review-top">
+              <div class="avatar">M</div>
+              <div class="review-meta">
+                <h3>Artisan à Porto-Novo</h3>
+                <span>Profil professionnel</span>
+              </div>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>C'est une vraie opportunité pour les artisans. Avoir un profil visible peut nous aider à trouver plus de clients.</p>
+          </article>
+          <article class="card review-card">
+            <div class="review-top">
+              <div class="avatar">S</div>
+              <div class="review-meta">
+                <h3>Cliente à Parakou</h3>
+                <span>Recherche locale</span>
+              </div>
+            </div>
+            <div class="stars">★★★★★</div>
+            <p>Enfin une application pensée pour nos besoins. Simple, claire et utile pour trouver un artisan plus rapidement.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" id="cta">
+      <div class="container fade-in">
+        <div class="section-kicker">🚀 Rejoins les premiers</div>
+        <h2 class="display">Télécharge ahap! et découvre une nouvelle façon de trouver des artisans.</h2>
+        <p class="lead">Clients et artisans : rejoignez maintenant la communauté ahap! et participez à la construction d'un écosystème plus fiable pour les services de proximité.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.ahap.app" target="_blank" rel="noopener" class="playstore-btn" aria-label="Télécharger ahap! sur Google Play Store">
+          <span class="play-icon">▶</span>
+          <span class="play-text">
+            <small>Disponible gratuitement sur</small>
+            <strong>Google Play Store</strong>
+          </span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>
+        <strong>ahap!</strong><br />
+        L'application des artisans d'Afrique.<br />
+        Mécanicien · Électricien · Menuisier · Couturier · Maçon · Peintre<br />
+        <span>© 2026 ahap! · Contact · Politique de confidentialité</span>
+      </p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/22994507686" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Contacter ahap! sur WhatsApp">💬</a>
+
+  <div class="sticky-bar" id="stickyBar" aria-label="Téléchargement rapide">
+    <div class="sticky-text">
+      <strong>Télécharge ahap!</strong>
+      <span>Gratuit · Play Store</span>
+    </div>
+    <a href="https://play.google.com/store/apps/details?id=com.ahap.app" target="_blank" rel="noopener" class="btn btn-primary">Télécharger</a>
+  </div>
+
+  <script>
+    function loadYouTube() {
+      const facade = document.getElementById("ytFacade");
+      const wrap = document.getElementById("heroVideoWrap");
+
+      if (!facade || !wrap) return;
+
+      const iframe = document.createElement("iframe");
+      iframe.src = "https://www.youtube.com/embed/ISpoLRntwrI?autoplay=1&rel=0&modestbranding=1&playsinline=1";
+      iframe.title = "ahap! — Comment ça marche";
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      iframe.allowFullscreen = true;
+      iframe.style.cssText = "width:100%;height:100%;border:none;display:block;";
+
+      wrap.replaceChild(iframe, facade);
+    }
+
+    const ytFacade = document.getElementById("ytFacade");
+    if (ytFacade) {
+      ytFacade.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          loadYouTube();
+        }
+      });
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.14 }
+    );
+
+    document.querySelectorAll(".fade-in").forEach((element) => observer.observe(element));
+
+    const stickyBar = document.getElementById("stickyBar");
+    const hero = document.querySelector(".hero");
+
+    function handleStickyBar() {
+      if (!stickyBar || !hero) return;
+      const heroBottom = hero.getBoundingClientRect().bottom;
+      if (heroBottom < 0) {
+        stickyBar.classList.add("visible");
+      } else {
+        stickyBar.classList.remove("visible");
+      }
+    }
+
+    window.addEventListener("scroll", handleStickyBar, { passive: true });
+    window.addEventListener("resize", handleStickyBar);
+    handleStickyBar();
+
+    function scrollToSection(id) {
+      const element = document.getElementById(id);
+      if (!element) return;
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  </script>
+</body>
+</html>
